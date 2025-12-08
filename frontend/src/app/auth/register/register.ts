@@ -44,7 +44,7 @@ export class Register {
   initializeRegistrationForm(): void {
     this.registrationForm = this.fb.group({
       username: ['', [Validators.required]],
-      indexNumber: ['', [Validators.required]],
+      indexNumber: ['', [Validators.required, Validators.pattern(/^21cse0/i)]],
       email: ['', [Validators.required, this.emailValidator.bind(this)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
@@ -63,7 +63,7 @@ export class Register {
     if (!email) {
       return null;
     }
-    if (!email.endsWith('@std.sab.ac.lk')) {
+    if (!email.endsWith('@std.foc.sab.ac.lk')) {
       return { invalidEmailDomain: true };
     }
     return null;
