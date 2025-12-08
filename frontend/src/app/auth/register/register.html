@@ -1,0 +1,233 @@
+<div class="register-container">
+  <div class="register-card">
+    <!-- Header -->
+    <div class="register-header">
+      <h1 class="register-title">Create Account</h1>
+      <p class="register-subtitle">Join GoPA and manage your GPA</p>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+      <div class="progress-step" [class.active]="currentStep === 1" [class.completed]="currentStep > 1">
+        <span class="step-number">1</span>
+        <span class="step-label">Details</span>
+      </div>
+      <div class="progress-line" [class.completed]="currentStep > 1"></div>
+      <div class="progress-step" [class.active]="currentStep === 2" [class.completed]="currentStep > 2">
+        <span class="step-number">2</span>
+        <span class="step-label">Verify</span>
+      </div>
+      <div class="progress-line" [class.completed]="currentStep > 2"></div>
+      <div class="progress-step" [class.active]="currentStep === 3">
+        <span class="step-number">3</span>
+        <span class="step-label">Agree</span>
+      </div>
+    </div>
+
+    <!-- Step 1: Registration Form -->
+    <div class="step-content" *ngIf="currentStep === 1">
+      <form [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()" class="register-form">
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            class="form-input"
+            placeholder="Choose your username"
+            [class.error]="username?.invalid && username?.touched"
+          />
+          <div class="error-text" *ngIf="username?.invalid && username?.touched">
+            Username is required
+          </div>
+        </div>
+
+        <!-- Index Number -->
+        <div class="form-group">
+          <label for="indexNumber" class="form-label">Index Number</label>
+          <input
+            type="text"
+            id="indexNumber"
+            formControlName="indexNumber"
+            class="form-input"
+            placeholder="e.g., 21/22-001"
+            [class.error]="indexNumber?.invalid && indexNumber?.touched"
+          />
+          <div class="error-text" *ngIf="indexNumber?.invalid && indexNumber?.touched">
+            Index number is required
+          </div>
+        </div>
+
+        <!-- University Email -->
+        <div class="form-group">
+          <label for="email" class="form-label">University Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-input"
+            placeholder="name@std.sab.ac.lk"
+            [class.error]="email?.invalid && email?.touched"
+          />
+          <div class="error-text" *ngIf="email?.touched">
+            <span *ngIf="email?.hasError('required')">Email is required</span>
+            <span *ngIf="email?.hasError('invalidEmailDomain')">
+              Please use your university email (@std.sab.ac.lk)
+            </span>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-input"
+            placeholder="At least 6 characters"
+            [class.error]="password?.invalid && password?.touched"
+          />
+          <div class="error-text" *ngIf="password?.invalid && password?.touched">
+            <span *ngIf="password?.hasError('required')">Password is required</span>
+            <span *ngIf="password?.hasError('minlength')">Password must be at least 6 characters</span>
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            class="form-input"
+            placeholder="Re-enter your password"
+            [class.error]="(confirmPassword!.invalid || registrationForm!.hasError('passwordMismatch')) && confirmPassword!.touched"
+          />
+          <div class="error-text" *ngIf="confirmPassword!.touched">
+            <span *ngIf="confirmPassword!.hasError('required')">Please confirm your password</span>
+            <span *ngIf="registrationForm!.hasError('passwordMismatch')">Passwords do not match</span>
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-alert" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="registrationForm.invalid || isLoading"
+        >
+          {{ isLoading ? 'Sending OTP...' : 'Continue' }}
+        </button>
+      </form>
+
+      <!-- Login Link -->
+      <div class="form-footer">
+        <p>
+          Already have an account?
+          <a [routerLink]="['/auth/login']">Login here</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 2: OTP Verification -->
+    <div class="step-content" *ngIf="currentStep === 2">
+      <div class="otp-section">
+        <p class="otp-instruction">We've sent a 6-digit code to {{ userEmail }}</p>
+
+        <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()" class="otp-form">
+          <div class="form-group">
+            <label for="otp" class="form-label">Enter OTP</label>
+            <input
+              type="text"
+              id="otp"
+              formControlName="otp"
+              class="form-input otp-input"
+              placeholder="000000"
+              maxlength="6"
+              [class.error]="otp?.invalid && otp?.touched"
+            />
+            <div class="error-text" *ngIf="otp?.invalid && otp?.touched">
+              OTP must be 6 digits
+            </div>
+          </div>
+
+          <!-- Error Message -->
+          <div class="error-alert" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+
+          <!-- Success Message -->
+          <div class="success-alert" *ngIf="successMessage">
+            {{ successMessage }}
+          </div>
+
+          <!-- Verify Button -->
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="otpForm.invalid || isLoading"
+          >
+            {{ isLoading ? 'Verifying...' : 'Verify OTP' }}
+          </button>
+        </form>
+
+        <!-- Back Button -->
+        <button type="button" class="btn-secondary" (click)="goBack()">
+          Back
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 3: Privacy Policy -->
+    <div class="step-content" *ngIf="currentStep === 3">
+      <div class="privacy-section">
+        <!-- Success Message -->
+        <div class="success-alert" *ngIf="successMessage">
+          {{ successMessage }}
+        </div>
+
+        <!-- Privacy Agreement -->
+        <div class="privacy-agreement">
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="privacyAgreed"
+              class="checkbox-input"
+            />
+            <span class="checkbox-text">
+              I agree to the
+              <a [routerLink]="['/auth/privacy']" target="_blank">Privacy and Policy Agreement</a>
+            </span>
+          </label>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-alert" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Register Button -->
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="completeRegistration()"
+          [disabled]="!privacyAgreed || isLoading"
+        >
+          {{ isLoading ? 'Registering...' : 'Complete Registration' }}
+        </button>
+
+        <!-- Back Button -->
+        <button type="button" class="btn-secondary" (click)="goBack()">
+          Back
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

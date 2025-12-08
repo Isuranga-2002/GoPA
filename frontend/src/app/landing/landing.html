@@ -1,0 +1,30 @@
+<div class="landing-container">
+  <!-- Logo Section -->
+  <div class="logo-section">
+    <svg class="logo-placeholder" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="55" fill="#2563eb" opacity="0.1" />
+      <text x="60" y="70" font-size="48" font-weight="bold" text-anchor="middle" fill="#2563eb">
+        GPA
+      </text>
+    </svg>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="heading">GoPA</h1>
+      <p class="subtitle">Automated GPA Calculating and Analysis Web Application</p>
+
+      <p class="description">
+        GoPA helps students of Sabaragamuwa University easily calculate, track, and analyze their
+        GPA performance.
+      </p>
+
+      <!-- Navigation Buttons -->
+      <div class="button-group">
+        <button class="btn btn-primary" [routerLink]="['/auth/login']">Login</button>
+        <button class="btn btn-secondary" [routerLink]="['/auth/register']">Register</button>
+      </div>
+    </div>
+  </section>
+</div>
