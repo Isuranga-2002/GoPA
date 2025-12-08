@@ -9,6 +9,22 @@
   padding: 1.5rem;
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
     Cantarell, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-image: url('/landing_background.png');
+  background-size: clamp(520px, 100%, 1500px);
+  background-position: bottom;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Login Card */
@@ -20,6 +36,20 @@
   width: 100%;
   max-width: 420px;
   animation: fadeInCard 0.6s ease-out;
+  position: relative;
+  z-index: 1;
+}
+
+.login-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.login-logo img {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Header */

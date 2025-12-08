@@ -1,5 +1,10 @@
 <div class="register-container">
   <div class="register-card">
+    <!-- Logo -->
+    <div class="register-logo">
+      <img src="/logo_withoutbg.png" alt="GoPA logo" />
+    </div>
+
     <!-- Header -->
     <div class="register-header">
       <h1 class="register-title">Create Account</h1>
@@ -51,12 +56,13 @@
             id="indexNumber"
             formControlName="indexNumber"
             class="form-input"
-            placeholder="e.g., 21/22-001"
+            placeholder="21CSE0XXX"
             [class.error]="indexNumber?.invalid && indexNumber?.touched"
           />
-          <div class="error-text" *ngIf="indexNumber?.invalid && indexNumber?.touched">
-            Index number is required
-          </div>
+            <div class="error-text" *ngIf="indexNumber?.invalid && indexNumber?.touched">
+              <span *ngIf="indexNumber?.hasError('required')">Index number is required</span>
+              <span *ngIf="indexNumber?.hasError('pattern')">Index must start with 21CSE0</span>
+            </div>
         </div>
 
         <!-- University Email -->
@@ -67,7 +73,7 @@
             id="email"
             formControlName="email"
             class="form-input"
-            placeholder="name@std.sab.ac.lk"
+            placeholder="xxxxxxxxx@std.foc.sab.ac.lk"
             [class.error]="email?.invalid && email?.touched"
           />
           <div class="error-text" *ngIf="email?.touched">
