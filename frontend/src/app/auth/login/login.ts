@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -58,7 +59,7 @@ export class Login {
 
     // Send login request to backend for student credentials
     this.isLoading = true;
-    this.http.post<{ token: string; role: string }>('http://localhost:3000/api/auth/login', {
+    this.http.post<{ message: string; token: string; user: any }>(`${environment.apiUrl}/auth/login`, {
       username,
       password
     }).subscribe({
@@ -66,14 +67,14 @@ export class Login {
         this.isLoading = false;
         // Store token and role in localStorage
         localStorage.setItem('authToken', response.token);
-        localStorage.setItem('userRole', response.role || 'student');
+        localStorage.setItem('userRole', 'student');
         // Navigate to dashboard
         this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         this.isLoading = false;
         console.error('Login error:', error);
-        this.errorMessage = 'Invalid credentials. Please try again.';
+        this.errorMessage = error.error?.message || 'Login failed. Please try again.';
       }
     });
   }
