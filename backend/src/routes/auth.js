@@ -83,16 +83,32 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
+  // Validate request body
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Username and password are required' });
+  }
+
   // Admin login (static)
   if (username === 'admin1@gopa' && password === 'qrs%253QT!#@$') {
-    return res.json({ message: 'Admin login success', role: 'admin' });
+    const token = jwt.sign({ id: 'admin', role: 'admin' }, process.env.JWT_SECRET, {
+      expiresIn: '2h'
+    });
+    return res.json({ 
+      message: 'Admin login success', 
+      token,
+      user: {
+        id: 'admin',
+        username: 'admin1@gopa',
+        role: 'admin'
+      }
+    });
   }
 
   try {
     const [users] = await db.execute('SELECT * FROM users WHERE username = ?', [username]);
 
     if (users.length === 0) {
-      return res.status(400).json({ message: 'User not found' });
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     const user = users[0];
@@ -116,7 +132,7 @@ router.post('/login', async (req, res) => {
       }
     });
   } catch (err) {
-    console.error(err);
+    console.error('Login error:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
