@@ -1,30 +1,15 @@
 /* Privacy Policy Page Styles */
 
 .privacy-container {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
   padding: 2rem 1.5rem;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
-  position: relative;
   overflow-x: hidden;
 }
 
-.privacy-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/landing_background.png');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.18;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 0;
-}
+/* Remove the background styling as it's now global */
+/* .privacy-container background and ::before styles moved to global .gopa-background class */
 
 /* Privacy Card */
 .privacy-card {

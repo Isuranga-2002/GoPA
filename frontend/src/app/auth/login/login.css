@@ -1,31 +1,14 @@
 /* Login Page Styles */
 
 .login-container {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom right, #c3cfe2, #f5f7fa);
   padding: 1.5rem;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
-  position: relative;
-  overflow: hidden;
 }
 
-.login-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-repeat: no-repeat;
-  background-image: url('/landing_background.png');
-  background-size: clamp(520px, 100%, 1500px);
-  background-position: bottom;
-  opacity: 0.08;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 0;
-}
+/* Remove the background styling as it's now global */
+/* .login-container::before styles moved to global .gopa-background class */
 
 /* Login Card */
 .login-card {
