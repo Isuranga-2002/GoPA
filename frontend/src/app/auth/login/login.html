@@ -1,5 +1,10 @@
-<div class="login-container">
+<div class="gopa-background login-container">
   <div class="login-card">
+    <!-- Logo -->
+    <div class="login-logo">
+      <img src="/logo_withoutbg.png" alt="GoPA logo" />
+    </div>
+
     <!-- Header -->
     <div class="login-header">
       <h1 class="login-title">Welcome to GoPA</h1>
@@ -18,9 +23,10 @@
           class="form-input"
           placeholder="Enter your username"
           [class.error]="username?.invalid && username?.touched"
+          (focus)="clearMessages()"
         />
         <div class="error-text" *ngIf="username?.invalid && username?.touched">
-          Username is required
+          <span *ngIf="username?.errors?.['required']">Username is required</span>
         </div>
       </div>
 
@@ -34,14 +40,21 @@
           class="form-input"
           placeholder="Enter your password"
           [class.error]="password?.invalid && password?.touched"
+          (focus)="clearMessages()"
         />
         <div class="error-text" *ngIf="password?.invalid && password?.touched">
-          Password is required
+          <span *ngIf="password?.errors?.['required']">Password is required</span>
         </div>
+      </div>
+
+      <!-- Success Message -->
+      <div class="success-alert" *ngIf="successMessage">
+        {{ successMessage }}
       </div>
 
       <!-- Error Message -->
       <div class="error-alert" *ngIf="errorMessage">
+        <strong>Login Failed</strong><br>
         {{ errorMessage }}
       </div>
 
@@ -49,9 +62,11 @@
       <button
         type="submit"
         class="btn-login"
-        [disabled]="isLoading"
+        [disabled]="isLoading || loginForm.invalid"
+        [class.loading]="isLoading"
       >
-        {{ isLoading ? 'Logging in...' : 'Login' }}
+        <span *ngIf="isLoading">Logging in...</span>
+        <span *ngIf="!isLoading">Login</span>
       </button>
     </form>
 

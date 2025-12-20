@@ -1,30 +1,61 @@
-<div class="landing-container">
-  <!-- Logo Section -->
-  <div class="logo-section">
-    <svg class="logo-placeholder" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="60" cy="60" r="55" fill="#2563eb" opacity="0.1" />
-      <text x="60" y="70" font-size="48" font-weight="bold" text-anchor="middle" fill="#2563eb">
-        GPA
-      </text>
-    </svg>
-  </div>
+<div class="gopa-background landing-shell">
+  <div class="ambient ambient-1"></div>
+  <div class="ambient ambient-2"></div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1 class="heading">GoPA</h1>
-      <p class="subtitle">Automated GPA Calculating and Analysis Web Application</p>
+  <div class="landing-grid">
+    <!-- Left: Hero copy -->
+    <section class="hero">
+      <div class="logo-row">
+        <img src="/landing_logo.png" alt="GoPA logo" class="logo-image" />
+      </div>
 
-      <p class="description">
-        GoPA helps students of Sabaragamuwa University easily calculate, track, and analyze their
-        GPA performance.
+      <h1 class="heading">Automated GPA Intelligence for SUSL</h1>
+      <p class="subtitle">
+        GoPA helps students of Sabaragamuwa University of Sri lanka track, forecast, and analyze GPA performance with clarity.
       </p>
 
-      <!-- Navigation Buttons -->
+      <div class="quick-facts">
+        <div class="chip">Real-time GPA tracking</div>
+        <div class="chip">Year-wise analytics</div>
+        <div class="chip">Repeat detection</div>
+      </div>
+
       <div class="button-group">
         <button class="btn btn-primary" [routerLink]="['/auth/login']">Login</button>
         <button class="btn btn-secondary" [routerLink]="['/auth/register']">Register</button>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Right: Highlight card -->
+    <section class="card">
+      <div class="card-header">
+        <p class="eyebrow">Why GoPA?</p>
+        <h2 class="card-title">Plan smarter. Graduate confident.</h2>
+        <p class="card-text">
+          Stay ahead with automated GPA calculations, repeat alerts, and dashboards tailored for the 21/22 Software
+          Engineering batch.
+        </p>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-value">24/7</span>
+          <span class="stat-label">Access anywhere</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">+5</span>
+          <span class="stat-label">Views: term, year, course</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">Zero</span>
+          <span class="stat-label">Manual recalcs</span>
+        </div>
+      </div>
+
+      <div class="cta-hint">
+        <span class="pulse"></span>
+        <p>Start at the dashboard in under a minute.</p>
+      </div>
+    </section>
+  </div>
 </div>
