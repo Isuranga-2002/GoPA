@@ -35,7 +35,6 @@ export class Dashboard {
     { path: '/dashboard', label: 'Overview', active: true },
     { path: '/dashboard/results', label: 'Results', active: false },
     { path: '/dashboard/year-wise-gpa', label: 'Year-wise GPA', active: false },
-    { path: '/dashboard/cumulative-gpa', label: 'Cumulative GPA', active: false },
     { path: '/dashboard/repeats', label: 'Medicals & Repeats', active: false },
     { path: '/dashboard/profile', label: 'Profile', active: false },
     { path: '#', label: 'Analytics', active: false, disabled: true },
