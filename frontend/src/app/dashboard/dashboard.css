@@ -269,7 +269,7 @@
 
 .menu-item.active .menu-link {
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  color: white;
+  color: rgb(11, 11, 11);
   box-shadow: var(--shadow-md);
   border-color: var(--accent);
 }

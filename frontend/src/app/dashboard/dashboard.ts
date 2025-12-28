@@ -51,6 +51,12 @@ export class Dashboard {
       color: 'primary'
     },
     {
+      title: 'Cumulative GPA',
+      value: this.studentData.cumulativeGPA.toFixed(3),
+      description: 'Detailed GPA Analysis',
+      color: 'primary'
+    },
+    {
       title: 'Degree Class',
       value: this.studentData.degreeClass,
       description: 'Current Classification',
