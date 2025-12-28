@@ -13,7 +13,6 @@ export const routes: Routes = [
     children: [
       { path: 'results', loadComponent: () => import('./dashboard/results/results').then(m => m.Results) },
       { path: 'year-wise-gpa', loadComponent: () => import('./dashboard/year-wise-gpa/year-wise-gpa').then(m => m.YearWiseGpa) },
-      { path: 'cumulative-gpa', loadComponent: () => import('./dashboard/cumulative-gpa/cumulative-gpa').then(m => m.CumulativeGpa) },
       { path: 'repeats', loadComponent: () => import('./dashboard/repeats/repeats').then(m => m.Repeats) }
     ]
   },
