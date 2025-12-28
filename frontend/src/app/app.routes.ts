@@ -9,7 +9,13 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
+    loadComponent: () => import('./dashboard/dashboard').then(m => m.Dashboard),
+    children: [
+      { path: 'results', loadComponent: () => import('./dashboard/results/results').then(m => m.Results) },
+      { path: 'year-wise-gpa', loadComponent: () => import('./dashboard/year-wise-gpa/year-wise-gpa').then(m => m.YearWiseGpa) },
+      { path: 'cumulative-gpa', loadComponent: () => import('./dashboard/cumulative-gpa/cumulative-gpa').then(m => m.CumulativeGpa) },
+      { path: 'repeats', loadComponent: () => import('./dashboard/repeats/repeats').then(m => m.Repeats) }
+    ]
   },
   {
     path: 'admin',
