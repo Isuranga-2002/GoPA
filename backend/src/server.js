@@ -11,7 +11,21 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
+  credentials: true
+}));
+
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  console.log('Headers:', req.headers);
+  if (req.method === 'POST' && req.body) {
+    console.log('Body:', req.body);
+  }
+  next();
+});
+
 app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 

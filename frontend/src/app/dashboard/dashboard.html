@@ -1,1 +1,127 @@
-<p>dashboard works!</p>
+<div class="gopa-background dashboard-container">
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <div class="logo">
+        <img src="/logo_withoutbg.png" alt="GoPA Logo" class="logo-image">
+        <div class="logo-text">
+          <span class="logo-title">GoPA</span>
+          <span class="logo-subtitle">Student Dashboard</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="nav-right">
+      <div class="user-info">
+        <div class="user-details">
+          <span class="user-name">{{ studentData.name }}</span>
+          <span class="user-index">{{ studentData.indexNumber }}</span>
+        </div>
+        <div class="user-avatar">
+          {{ studentData.name.charAt(0) }}
+        </div>
+      </div>
+      <button class="logout-btn" (click)="logout()">
+        <span class="logout-text">Logout</span>
+      </button>
+      
+      <!-- Mobile menu toggle -->
+      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+        <span class="hamburger">☰</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="dashboard-body">
+    <!-- Side Navigation -->
+    <aside class="side-nav" [class.mobile-open]="isMobileMenuOpen">
+      <nav class="nav-menu">
+        <ul class="menu-list">
+          <li *ngFor="let item of menuItems" 
+              class="menu-item" 
+              [class.active]="item.active"
+              [class.disabled]="item.disabled">
+            <a (click)="navigateTo(item.path)" 
+               [class.disabled-link]="item.disabled"
+               class="menu-link">
+              <span class="menu-label">{{ item.label }}</span>
+              <span *ngIf="item.disabled" class="coming-soon">Soon</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Dashboard Overview (Default View) -->
+      <div class="overview-section">
+        <!-- Welcome Message -->
+        <section class="welcome-section">
+          <div class="welcome-content">
+            <h2 class="welcome-title">Welcome back, {{ studentData.name }}!</h2>
+            <p class="status-message">
+              {{ studentData.resultsStatus }}
+            </p>
+          </div>
+        </section>
+
+        <!-- Summary Cards -->
+        <section class="summary-section">
+          <h3 class="section-title">Academic Overview</h3>
+          <div class="summary-grid">
+            <div *ngFor="let card of summaryCards" 
+                 class="summary-card" 
+                 [ngClass]="getCardColorClass(card.color)">
+              <div class="card-header">
+                <h4 class="card-title">{{ card.title }}</h4>
+                <div class="card-icon" [ngClass]="getCardIconClass(card.color)"></div>
+              </div>
+              <div class="card-body">
+                <div class="card-value">{{ card.value }}</div>
+                <div class="card-description">{{ card.description }}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions-section">
+          <h3 class="section-title">Quick Actions</h3>
+          <div class="actions-grid">
+            <button class="action-btn" (click)="navigateTo('/dashboard/results')">
+              <div class="action-content">
+                <span class="action-text">View Results</span>
+                <span class="action-desc">Check your grades</span>
+              </div>
+            </button>
+            <button class="action-btn" (click)="navigateTo('/dashboard/cumulative-gpa')">
+              <div class="action-content">
+                <span class="action-text">CGPA Analysis</span>
+                <span class="action-desc">Track your progress</span>
+              </div>
+            </button>
+            <button class="action-btn" (click)="navigateTo('/dashboard/repeats')">
+              <div class="action-content">
+                <span class="action-text">Repeats & Medicals</span>
+                <span class="action-desc">Manage special cases</span>
+              </div>
+            </button>
+            <button class="action-btn disabled" disabled>
+              <div class="action-content">
+                <span class="action-text">Download Report</span>
+                <span class="action-desc">Coming soon</span>
+              </div>
+              <span class="coming-soon-badge">Soon</span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay" 
+       [class.active]="isMobileMenuOpen" 
+       (click)="closeMobileMenu()"></div>
+</div>

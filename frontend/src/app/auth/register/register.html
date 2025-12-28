@@ -1,4 +1,4 @@
-<div class="register-container">
+<div class="gopa-background register-container">
   <div class="register-card">
     <!-- Logo -->
     <div class="register-logo">
@@ -32,89 +32,97 @@
     <!-- Step 1: Registration Form -->
     <div class="step-content" *ngIf="currentStep === 1">
       <form [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()" class="register-form">
-        <!-- Username -->
-        <div class="form-group">
-          <label for="username" class="form-label">Username</label>
-          <input
-            type="text"
-            id="username"
-            formControlName="username"
-            class="form-input"
-            placeholder="Choose your username"
-            [class.error]="username?.invalid && username?.touched"
-          />
-          <div class="error-text" *ngIf="username?.invalid && username?.touched">
-            Username is required
-          </div>
-        </div>
-
-        <!-- Index Number -->
-        <div class="form-group">
-          <label for="indexNumber" class="form-label">Index Number</label>
-          <input
-            type="text"
-            id="indexNumber"
-            formControlName="indexNumber"
-            class="form-input"
-            placeholder="21CSE0XXX"
-            [class.error]="indexNumber?.invalid && indexNumber?.touched"
-          />
-            <div class="error-text" *ngIf="indexNumber?.invalid && indexNumber?.touched">
-              <span *ngIf="indexNumber?.hasError('required')">Index number is required</span>
-              <span *ngIf="indexNumber?.hasError('pattern')">Index must start with 21CSE0</span>
+        <div class="form-columns">
+          <!-- Left Column -->
+          <div class="form-column">
+            <!-- Username -->
+            <div class="form-group">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                id="username"
+                formControlName="username"
+                class="form-input"
+                placeholder="Choose your username"
+                [class.error]="username?.invalid && username?.touched"
+              />
+              <div class="error-text" *ngIf="username?.invalid && username?.touched">
+                Username is required
+              </div>
             </div>
-        </div>
 
-        <!-- University Email -->
-        <div class="form-group">
-          <label for="email" class="form-label">University Email</label>
-          <input
-            type="email"
-            id="email"
-            formControlName="email"
-            class="form-input"
-            placeholder="xxxxxxxxx@std.foc.sab.ac.lk"
-            [class.error]="email?.invalid && email?.touched"
-          />
-          <div class="error-text" *ngIf="email?.touched">
-            <span *ngIf="email?.hasError('required')">Email is required</span>
-            <span *ngIf="email?.hasError('invalidEmailDomain')">
-              Please use your university email (@std.sab.ac.lk)
-            </span>
+            <!-- Index Number -->
+            <div class="form-group">
+              <label for="indexNumber" class="form-label">Index Number</label>
+              <input
+                type="text"
+                id="indexNumber"
+                formControlName="indexNumber"
+                class="form-input"
+                placeholder="21CSE0XXX"
+                [class.error]="indexNumber?.invalid && indexNumber?.touched"
+              />
+                <div class="error-text" *ngIf="indexNumber?.invalid && indexNumber?.touched">
+                  <span *ngIf="indexNumber?.hasError('required')">Index number is required</span>
+                  <span *ngIf="indexNumber?.hasError('pattern')">Index must start with 21CSE0</span>
+                </div>
+            </div>
+
+            <!-- University Email -->
+            <div class="form-group">
+              <label for="email" class="form-label">University Email</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                class="form-input"
+                placeholder="xxxxxxxxx@std.foc.sab.ac.lk"
+                [class.error]="email?.invalid && email?.touched"
+              />
+              <div class="error-text" *ngIf="email?.touched">
+                <span *ngIf="email?.hasError('required')">Email is required</span>
+                <span *ngIf="email?.hasError('invalidEmailDomain')">
+                  Please use your university email (@std.sab.ac.lk)
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- Password -->
-        <div class="form-group">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            id="password"
-            formControlName="password"
-            class="form-input"
-            placeholder="At least 6 characters"
-            [class.error]="password?.invalid && password?.touched"
-          />
-          <div class="error-text" *ngIf="password?.invalid && password?.touched">
-            <span *ngIf="password?.hasError('required')">Password is required</span>
-            <span *ngIf="password?.hasError('minlength')">Password must be at least 6 characters</span>
-          </div>
-        </div>
+          <!-- Right Column -->
+          <div class="form-column">
+            <!-- Password -->
+            <div class="form-group">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                formControlName="password"
+                class="form-input"
+                placeholder="At least 6 characters"
+                [class.error]="password?.invalid && password?.touched"
+              />
+              <div class="error-text" *ngIf="password?.invalid && password?.touched">
+                <span *ngIf="password?.hasError('required')">Password is required</span>
+                <span *ngIf="password?.hasError('minlength')">Password must be at least 6 characters</span>
+              </div>
+            </div>
 
-        <!-- Confirm Password -->
-        <div class="form-group">
-          <label for="confirmPassword" class="form-label">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            formControlName="confirmPassword"
-            class="form-input"
-            placeholder="Re-enter your password"
-            [class.error]="(confirmPassword!.invalid || registrationForm!.hasError('passwordMismatch')) && confirmPassword!.touched"
-          />
-          <div class="error-text" *ngIf="confirmPassword!.touched">
-            <span *ngIf="confirmPassword!.hasError('required')">Please confirm your password</span>
-            <span *ngIf="registrationForm!.hasError('passwordMismatch')">Passwords do not match</span>
+            <!-- Confirm Password -->
+            <div class="form-group">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                formControlName="confirmPassword"
+                class="form-input"
+                placeholder="Re-enter your password"
+                [class.error]="(confirmPassword!.invalid || registrationForm!.hasError('passwordMismatch')) && confirmPassword!.touched"
+              />
+              <div class="error-text" *ngIf="confirmPassword!.touched">
+                <span *ngIf="confirmPassword!.hasError('required')">Please confirm your password</span>
+                <span *ngIf="registrationForm!.hasError('passwordMismatch')">Passwords do not match</span>
+              </div>
+            </div>
           </div>
         </div>
 

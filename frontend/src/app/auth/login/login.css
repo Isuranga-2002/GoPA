@@ -1,31 +1,14 @@
 /* Login Page Styles */
 
 .login-container {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom right, #c3cfe2, #f5f7fa);
   padding: 1.5rem;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
-  position: relative;
-  overflow: hidden;
 }
 
-.login-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-repeat: no-repeat;
-  background-image: url('/landing_background.png');
-  background-size: clamp(520px, 100%, 1500px);
-  background-position: bottom;
-  opacity: 0.08;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 0;
-}
+/* Remove the background styling as it's now global */
+/* .login-container::before styles moved to global .gopa-background class */
 
 /* Login Card */
 .login-card {
@@ -126,17 +109,41 @@
   font-size: 0.85rem;
   color: #ef4444;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Success Alert */
+.success-alert {
+  background-color: #d1fae5;
+  border-left: 4px solid #10b981;
+  padding: 0.875rem 1rem;
+  border-radius: 0.375rem;
+  color: #047857;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  animation: slideIn 0.3s ease-out;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.1);
 }
 
 /* Error Alert */
 .error-alert {
   background-color: #fee2e2;
   border-left: 4px solid #ef4444;
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1rem;
   border-radius: 0.375rem;
   color: #b91c1c;
   font-size: 0.9rem;
+  margin-bottom: 1rem;
   animation: slideIn 0.3s ease-out;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.1);
+  line-height: 1.4;
+}
+
+.error-alert strong {
+  color: #991b1b;
+  font-weight: 600;
 }
 
 /* Submit Button */
@@ -168,6 +175,19 @@
   background-color: #9ca3af;
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+.btn-login.loading {
+  background-color: #6b7280;
+  cursor: wait;
+}
+
+.btn-login {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 /* Register Link */

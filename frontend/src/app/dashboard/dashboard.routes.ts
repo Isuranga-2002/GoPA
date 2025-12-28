@@ -5,9 +5,10 @@ import { CumulativeGpa } from './cumulative-gpa/cumulative-gpa';
 import { Repeats } from './repeats/repeats';
 
 export const DASHBOARD_ROUTES: Routes = [
-  { path: '', redirectTo: 'results', pathMatch: 'full' },
   { path: 'results', component: Results },
-  { path: 'year-gpa', component: YearWiseGpa },
-  { path: 'cumulative', component: CumulativeGpa },
+  { path: 'year-wise-gpa', component: YearWiseGpa },
+  { path: 'cumulative-gpa', component: CumulativeGpa },
   { path: 'repeats', component: Repeats }
+  // Note: Profile component will be added when created
+  // { path: 'profile', component: Profile }
 ];

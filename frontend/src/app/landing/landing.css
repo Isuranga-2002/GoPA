@@ -15,28 +15,11 @@
 }
 
 .landing-shell {
-  min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-top), var(--bg-bottom));
   padding: 3rem;
-  position: relative;
-  overflow: hidden;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
 }
 
-.landing-shell::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/landing_background.png');
-  background-repeat: no-repeat;
-  background-size: clamp(520px, 100%, 1500px);
-  background-position: bottom;
-  opacity: 0.08;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 0;
-}
+/* Remove the background styling as it's now global */
+/* .landing-shell background and ::before styles moved to global .gopa-background class */
 
 .ambient {
   position: absolute;

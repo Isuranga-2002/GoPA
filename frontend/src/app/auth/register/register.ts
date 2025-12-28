@@ -4,6 +4,8 @@ import { RouterModule, Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-register',
@@ -13,6 +15,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   styleUrl: './register.css'
 })
 export class Register {
+  private cdr = inject(ChangeDetectorRef);
+
   // Form groups for each step
   registrationForm!: FormGroup;
   otpForm!: FormGroup;
@@ -63,9 +67,9 @@ export class Register {
     if (!email) {
       return null;
     }
-    if (!email.endsWith('@std.foc.sab.ac.lk')) {
-      return { invalidEmailDomain: true };
-    }
+    // if (!email.endsWith('@std.foc.sab.ac.lk')) {
+    //   return { invalidEmailDomain: true };
+    // }
     return null;
   }
 
@@ -97,20 +101,24 @@ export class Register {
     this.userIndex = indexNumber;
     this.userEmail = email;
     this.userPassword = password;
+    this.isLoading = true;
 
     // Send OTP to email
-    this.isLoading = true;
-    this.http.post('http://localhost:3000/api/auth/send-otp', { email }).subscribe({
-      next: () => {
+    this.http.post<{ message: string }>('http://localhost:3000/api/auth/send-otp', { email }).subscribe({
+      next: (response) => {
         this.isLoading = false;
         this.otpSent = true;
         this.currentStep = 2;
-        this.successMessage = 'OTP sent to your email. Please check your inbox.';
+        this.successMessage = response.message || 'OTP sent to your email. Please check your inbox.';
+        
+        // ✅ Force Angular to re-check template bindings
+        this.cdr.detectChanges();
       },
       error: (error) => {
         this.isLoading = false;
         console.error('Error sending OTP:', error);
-        this.errorMessage = 'Failed to send OTP. Please try again.';
+        this.errorMessage = error.error?.message || 'Failed to send OTP. Please try again.';
+        this.cdr.detectChanges(); // optional, but good practice
       }
     });
   }
@@ -128,19 +136,21 @@ export class Register {
     const { otp } = this.otpForm.value;
 
     this.isLoading = true;
-    this.http.post('http://localhost:3000/api/auth/verify-otp', { 
+    this.http.post<{ message: string }>('http://localhost:3000/api/auth/verify-otp', { 
       email: this.userEmail, 
       otp 
     }).subscribe({
-      next: () => {
+      next: (response) => {
         this.isLoading = false;
-        // Verify student credentials
+        console.log('✅ OTP Verified:', response.message);
         this.verifyStudentCredentials();
+        this.cdr.detectChanges(); // 👈 force UI update
       },
       error: (error) => {
         this.isLoading = false;
         console.error('OTP verification error:', error);
-        this.errorMessage = 'Invalid OTP. Please try again.';
+        this.errorMessage = error.error?.message || 'Invalid OTP. Please try again.';
+        this.cdr.detectChanges();
       }
     });
   }
@@ -148,20 +158,24 @@ export class Register {
   // Verify student index and email in the system
   verifyStudentCredentials(): void {
     this.isLoading = true;
-    this.http.post('http://localhost:3000/api/auth/verify-student', { 
+    this.http.post<{ message: string }>('http://localhost:3000/api/auth/verify-student', { 
       index: this.userIndex,
       email: this.userEmail 
     }).subscribe({
-      next: () => {
+      next: (response) => {
         this.isLoading = false;
         this.otpVerified = true;
         this.currentStep = 3;
-        this.successMessage = 'OTP verified successfully! Please agree to the Privacy Policy to complete registration.';
+        this.successMessage = response.message + 
+          ' Please agree to the Privacy Policy to complete registration.';
+        console.log('✅ Step changed to 3');
+        this.cdr.detectChanges(); // 👈 ensure immediate UI refresh
       },
       error: (error) => {
         this.isLoading = false;
         console.error('Student verification error:', error);
-        this.errorMessage = 'Your credentials are not authorized for registration.';
+        this.errorMessage = error.error?.message || 'Your credentials are not authorized for registration.';
+        this.cdr.detectChanges();
       }
     });
   }
