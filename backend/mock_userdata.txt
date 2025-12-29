@@ -1,0 +1,15 @@
+Index     - Email                               - Username   - Password       - Status
+
+21CSE0600 - dsisuranga+test0@std.foc.sab.ac.lk  - Isuranga0  - TestPassword0  - R
+21CSE0601 - dsisuranga+test1@std.foc.sab.ac.lk  - Isuranga1  - TestPassword1  - R
+21CSE0602 - dsisuranga+test2@std.foc.sab.ac.lk  - Isuranga2  - TestPassword2  - P
+21CSE0603 - dsisuranga+test3@std.foc.sab.ac.lk  - Isuranga3  - TestPassword3  - P
+21CSE0604 - dsisuranga+test4@std.foc.sab.ac.lk  - Isuranga4  - TestPassword4  - P
+21CSE0605 - dsisuranga+test5@std.foc.sab.ac.lk  - Isuranga5  - TestPassword5  - P
+21CSE0606 - dsisuranga+test6@std.foc.sab.ac.lk  - Isuranga6  - TestPassword6  - P
+21CSE0607 - dsisuranga+test7@std.foc.sab.ac.lk  - Isuranga7  - TestPassword7  - P
+21CSE0608 - dsisuranga+test8@std.foc.sab.ac.lk  - Isuranga8  - TestPassword8  - P
+21CSE0609 - dsisuranga+test9@std.foc.sab.ac.lk  - Isuranga9  - TestPassword9  - P
+21CSE0610 - dsisuranga+test10@std.foc.sab.ac.lk - Isuranga10 - TestPassword10 - P
+21CSE0166 - dsisuranga@std.foc.sab.ac.lk        - Isuranga   - TestPassword   - P
+
