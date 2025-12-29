@@ -4,24 +4,29 @@
 
 /* Global Background Styles */
 .gopa-background {
-  min-height: 100vh;
+  @apply min-h-screen font-sans relative overflow-hidden;
   background: linear-gradient(to bottom right, #c3cfe2, #f5f7fa);
-  position: relative;
-  overflow: hidden;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
 }
 
 .gopa-background::before {
   content: '';
-  position: absolute;
-  inset: 0;
+  @apply absolute inset-0 pointer-events-none z-0;
   background-repeat: no-repeat;
   background-image: url('/landing_background.png');
   background-size: clamp(520px, 100%, 1500px);
   background-position: bottom;
   opacity: 0.08;
   mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 0;
+}
+
+/* Custom animations */
+@keyframes fadeInCard {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
