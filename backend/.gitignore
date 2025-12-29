@@ -25,3 +25,6 @@ Thumbs.db
 
 # Lock files (optional)
 package-lock.json
+
+
+mock_userdata.txt
