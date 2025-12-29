@@ -1,85 +1,86 @@
-<div class="gopa-background register-container">
-  <div class="register-card">
+<div class="gopa-background flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-glass py-6 px-12 w-full max-w-4xl animate-fade-in-card relative z-10">
+    
     <!-- Logo -->
-    <div class="register-logo">
-      <img src="/logo_withoutbg.png" alt="GoPA logo" />
+    <div class="flex justify-center mb-2">
+      <img src="/logo_withoutbg.png" alt="GoPA logo" class="w-32 h-auto object-contain" />
     </div>
 
     <!-- Header -->
-    <div class="register-header">
-      <h1 class="register-title">Create Account</h1>
-      <p class="register-subtitle">Join GoPA and manage your GPA</p>
+    <div class="text-center mb-4">
+      <h1 class="text-2xl font-bold text-gray-800 mb-1 tracking-tight">Create Account</h1>
+      <p class="text-sm text-gray-600 m-0">Join GoPA and manage your GPA</p>
     </div>
 
     <!-- Progress Indicator -->
-    <div class="progress-indicator">
-      <div class="progress-step" [class.active]="currentStep === 1" [class.completed]="currentStep > 1">
-        <span class="step-number">1</span>
-        <span class="step-label">Details</span>
+    <div class="flex items-center justify-between mb-5">
+      <div class="flex flex-col items-center gap-1" [class.text-blue-500]="currentStep === 1" [class.text-gray-400]="currentStep !== 1">
+        <span class="w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm transition-all duration-300" [ngClass]="currentStep >= 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'">1</span>
+        <span class="text-xs font-semibold uppercase tracking-wide" [ngClass]="currentStep >= 1 ? 'text-blue-500' : 'text-gray-400'">Details</span>
       </div>
-      <div class="progress-line" [class.completed]="currentStep > 1"></div>
-      <div class="progress-step" [class.active]="currentStep === 2" [class.completed]="currentStep > 2">
-        <span class="step-number">2</span>
-        <span class="step-label">Verify</span>
+      <div class="flex-1 h-0.5 mx-2 transition-colors duration-300" [ngClass]="currentStep > 1 ? 'bg-blue-500' : 'bg-gray-200'"></div>
+      <div class="flex flex-col items-center gap-1" [class.text-blue-500]="currentStep === 2" [class.text-gray-400]="currentStep !== 2">
+        <span class="w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm transition-all duration-300" [ngClass]="currentStep >= 2 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'">2</span>
+        <span class="text-xs font-semibold uppercase tracking-wide" [ngClass]="currentStep >= 2 ? 'text-blue-500' : 'text-gray-400'">Verify</span>
       </div>
-      <div class="progress-line" [class.completed]="currentStep > 2"></div>
-      <div class="progress-step" [class.active]="currentStep === 3">
-        <span class="step-number">3</span>
-        <span class="step-label">Agree</span>
+      <div class="flex-1 h-0.5 mx-2 transition-colors duration-300" [ngClass]="currentStep > 2 ? 'bg-blue-500' : 'bg-gray-200'"></div>
+      <div class="flex flex-col items-center gap-1" [class.text-blue-500]="currentStep === 3" [class.text-gray-400]="currentStep !== 3">
+        <span class="w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm transition-all duration-300" [ngClass]="currentStep >= 3 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'">3</span>
+        <span class="text-xs font-semibold uppercase tracking-wide" [ngClass]="currentStep >= 3 ? 'text-blue-500' : 'text-gray-400'">Agree</span>
       </div>
     </div>
 
     <!-- Step 1: Registration Form -->
-    <div class="step-content" *ngIf="currentStep === 1">
-      <form [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()" class="register-form">
-        <div class="form-columns">
+    <div class="" *ngIf="currentStep === 1">
+      <form [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()" class="">
+        <div class="grid md:grid-cols-2 gap-4">
           <!-- Left Column -->
-          <div class="form-column">
+          <div class="space-y-4">
             <!-- Username -->
-            <div class="form-group">
-              <label for="username" class="form-label">Username</label>
+            <div class="flex flex-col gap-2">
+              <label for="username" class="text-sm font-semibold text-gray-700 m-0">Username</label>
               <input
                 type="text"
                 id="username"
                 formControlName="username"
-                class="form-input"
+                class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm transition-all duration-300 outline-none focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)]"
                 placeholder="Choose your username"
-                [class.error]="username?.invalid && username?.touched"
+                [class]="username?.invalid && username?.touched ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)]' : ''"
               />
-              <div class="error-text" *ngIf="username?.invalid && username?.touched">
+              <div class="text-sm text-red-500 min-h-5" *ngIf="username?.invalid && username?.touched">
                 Username is required
               </div>
             </div>
 
             <!-- Index Number -->
-            <div class="form-group">
-              <label for="indexNumber" class="form-label">Index Number</label>
+            <div class="flex flex-col gap-2">
+              <label for="indexNumber" class="text-sm font-semibold text-gray-700 m-0">Index Number</label>
               <input
                 type="text"
                 id="indexNumber"
                 formControlName="indexNumber"
-                class="form-input"
+                class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm transition-all duration-300 outline-none focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)]"
                 placeholder="21CSE0XXX"
-                [class.error]="indexNumber?.invalid && indexNumber?.touched"
+                [class]="indexNumber?.invalid && indexNumber?.touched ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)]' : ''"
               />
-                <div class="error-text" *ngIf="indexNumber?.invalid && indexNumber?.touched">
+                <div class="text-sm text-red-500 min-h-5" *ngIf="indexNumber?.invalid && indexNumber?.touched">
                   <span *ngIf="indexNumber?.hasError('required')">Index number is required</span>
                   <span *ngIf="indexNumber?.hasError('pattern')">Index must start with 21CSE0</span>
                 </div>
             </div>
 
             <!-- University Email -->
-            <div class="form-group">
-              <label for="email" class="form-label">University Email</label>
+            <div class="flex flex-col gap-2">
+              <label for="email" class="text-sm font-semibold text-gray-700 m-0">University Email</label>
               <input
                 type="email"
                 id="email"
                 formControlName="email"
-                class="form-input"
+                class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm transition-all duration-300 outline-none focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)]"
                 placeholder="xxxxxxxxx@std.foc.sab.ac.lk"
-                [class.error]="email?.invalid && email?.touched"
+                [class]="email?.invalid && email?.touched ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)]' : ''"
               />
-              <div class="error-text" *ngIf="email?.touched">
+              <div class="text-sm text-red-500 min-h-5" *ngIf="email?.touched">
                 <span *ngIf="email?.hasError('required')">Email is required</span>
                 <span *ngIf="email?.hasError('invalidEmailDomain')">
                   Please use your university email (@std.sab.ac.lk)
@@ -89,36 +90,36 @@
           </div>
 
           <!-- Right Column -->
-          <div class="form-column">
+          <div class="space-y-4">
             <!-- Password -->
-            <div class="form-group">
-              <label for="password" class="form-label">Password</label>
+            <div class="flex flex-col gap-2">
+              <label for="password" class="text-sm font-semibold text-gray-700 m-0">Password</label>
               <input
                 type="password"
                 id="password"
                 formControlName="password"
-                class="form-input"
+                class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm transition-all duration-300 outline-none focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)]"
                 placeholder="At least 6 characters"
-                [class.error]="password?.invalid && password?.touched"
+                [class]="password?.invalid && password?.touched ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)]' : ''"
               />
-              <div class="error-text" *ngIf="password?.invalid && password?.touched">
+              <div class="text-sm text-red-500 min-h-5" *ngIf="password?.invalid && password?.touched">
                 <span *ngIf="password?.hasError('required')">Password is required</span>
                 <span *ngIf="password?.hasError('minlength')">Password must be at least 6 characters</span>
               </div>
             </div>
 
             <!-- Confirm Password -->
-            <div class="form-group">
-              <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <div class="flex flex-col gap-2">
+              <label for="confirmPassword" class="text-sm font-semibold text-gray-700 m-0">Confirm Password</label>
               <input
                 type="password"
                 id="confirmPassword"
                 formControlName="confirmPassword"
-                class="form-input"
+                class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm transition-all duration-300 outline-none focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)]"
                 placeholder="Re-enter your password"
-                [class.error]="(confirmPassword!.invalid || registrationForm!.hasError('passwordMismatch')) && confirmPassword!.touched"
+                [class]="(confirmPassword!.invalid || registrationForm!.hasError('passwordMismatch')) && confirmPassword!.touched ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)]' : ''"
               />
-              <div class="error-text" *ngIf="confirmPassword!.touched">
+              <div class="text-sm text-red-500 min-h-5" *ngIf="confirmPassword!.touched">
                 <span *ngIf="confirmPassword!.hasError('required')">Please confirm your password</span>
                 <span *ngIf="registrationForm!.hasError('passwordMismatch')">Passwords do not match</span>
               </div>
@@ -127,14 +128,14 @@
         </div>
 
         <!-- Error Message -->
-        <div class="error-alert" *ngIf="errorMessage">
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm mt-4" *ngIf="errorMessage">
           {{ errorMessage }}
         </div>
 
         <!-- Submit Button -->
         <button
           type="submit"
-          class="btn-primary"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded-lg text-sm transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:bg-blue-600 mt-6"
           [disabled]="registrationForm.invalid || isLoading"
         >
           {{ isLoading ? 'Sending OTP...' : 'Continue' }}
@@ -142,50 +143,50 @@
       </form>
 
       <!-- Login Link -->
-      <div class="form-footer">
-        <p>
+      <div class="text-center mt-4">
+        <p class="text-gray-600 text-sm m-0">
           Already have an account?
-          <a [routerLink]="['/auth/login']">Login here</a>
+          <a [routerLink]="['/auth/login']" class="text-blue-600 hover:text-blue-700 font-semibold no-underline hover:underline ml-1 transition-colors duration-200">Login here</a>
         </p>
       </div>
     </div>
 
     <!-- Step 2: OTP Verification -->
-    <div class="step-content" *ngIf="currentStep === 2">
-      <div class="otp-section">
-        <p class="otp-instruction">We've sent a 6-digit code to {{ userEmail }}</p>
+    <div class="" *ngIf="currentStep === 2">
+      <div class="text-center mb-6">
+        <p class="text-gray-700 text-sm mb-6">We've sent a 6-digit code to {{ userEmail }}</p>
 
-        <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()" class="otp-form">
-          <div class="form-group">
-            <label for="otp" class="form-label">Enter OTP</label>
+        <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()" class="">
+          <div class="flex flex-col gap-2 mb-4">
+            <label for="otp" class="text-sm font-semibold text-gray-700 m-0">Enter OTP</label>
             <input
               type="text"
               id="otp"
               formControlName="otp"
-              class="form-input otp-input"
+              class="px-4 py-3 border-2 border-gray-200 rounded-lg text-sm transition-all duration-300 outline-none focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)] text-center text-lg tracking-widest"
               placeholder="000000"
               maxlength="6"
-              [class.error]="otp?.invalid && otp?.touched"
+              [class]="otp?.invalid && otp?.touched ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)]' : ''"
             />
-            <div class="error-text" *ngIf="otp?.invalid && otp?.touched">
+            <div class="text-sm text-red-500 min-h-5" *ngIf="otp?.invalid && otp?.touched">
               OTP must be 6 digits
             </div>
           </div>
 
           <!-- Error Message -->
-          <div class="error-alert" *ngIf="errorMessage">
+          <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm mb-4" *ngIf="errorMessage">
             {{ errorMessage }}
           </div>
 
           <!-- Success Message -->
-          <div class="success-alert" *ngIf="successMessage">
+          <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm mb-4" *ngIf="successMessage">
             {{ successMessage }}
           </div>
 
           <!-- Verify Button -->
           <button
             type="submit"
-            class="btn-primary"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded-lg text-sm transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:bg-blue-600 mb-3"
             [disabled]="otpForm.invalid || isLoading"
           >
             {{ isLoading ? 'Verifying...' : 'Verify OTP' }}
@@ -193,44 +194,44 @@
         </form>
 
         <!-- Back Button -->
-        <button type="button" class="btn-secondary" (click)="goBack()">
+        <button type="button" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3.5 px-6 rounded-lg text-sm transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]" (click)="goBack()">
           Back
         </button>
       </div>
     </div>
 
     <!-- Step 3: Privacy Policy -->
-    <div class="step-content" *ngIf="currentStep === 3">
-      <div class="privacy-section">
+    <div class="" *ngIf="currentStep === 3">
+      <div class="text-center">
         <!-- Success Message -->
-        <div class="success-alert" *ngIf="successMessage">
+        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm mb-4" *ngIf="successMessage">
           {{ successMessage }}
         </div>
 
         <!-- Privacy Agreement -->
-        <div class="privacy-agreement">
-          <label class="checkbox-label">
+        <div class="mb-6">
+          <label class="flex items-start gap-3 text-left cursor-pointer">
             <input
               type="checkbox"
               [(ngModel)]="privacyAgreed"
-              class="checkbox-input"
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 mt-0.5 flex-shrink-0"
             />
-            <span class="checkbox-text">
+            <span class="text-sm text-gray-700">
               I agree to the
-              <a [routerLink]="['/auth/privacy']" target="_blank">Privacy and Policy Agreement</a>
+              <a [routerLink]="['/auth/privacy']" target="_blank" class="text-blue-600 hover:text-blue-700 font-semibold no-underline hover:underline">Privacy and Policy Agreement</a>
             </span>
           </label>
         </div>
 
         <!-- Error Message -->
-        <div class="error-alert" *ngIf="errorMessage">
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm mb-4" *ngIf="errorMessage">
           {{ errorMessage }}
         </div>
 
         <!-- Register Button -->
         <button
           type="button"
-          class="btn-primary"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded-lg text-sm transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:bg-blue-600 mb-3"
           (click)="completeRegistration()"
           [disabled]="!privacyAgreed || isLoading"
         >
@@ -238,7 +239,7 @@
         </button>
 
         <!-- Back Button -->
-        <button type="button" class="btn-secondary" (click)="goBack()">
+        <button type="button" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3.5 px-6 rounded-lg text-sm transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]" (click)="goBack()">
           Back
         </button>
       </div>

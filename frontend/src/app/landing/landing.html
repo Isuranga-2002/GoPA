@@ -1,60 +1,61 @@
-<div class="gopa-background landing-shell">
-  <div class="ambient ambient-1"></div>
-  <div class="ambient ambient-2"></div>
+<div class="gopa-background p-12 relative overflow-hidden">
+  <!-- Ambient light effects -->
+  <div class="absolute w-96 h-96 bg-blue-300 rounded-full blur-[80px] opacity-35 -top-20 -left-16 z-0"></div>
+  <div class="absolute w-[420px] h-[420px] bg-indigo-300 rounded-full blur-[80px] opacity-35 -bottom-32 -right-20 z-0"></div>
 
-  <div class="landing-grid">
+  <div class="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-center max-w-7xl mx-auto">
     <!-- Left: Hero copy -->
-    <section class="hero">
-      <div class="logo-row">
-        <img src="/landing_logo.png" alt="GoPA logo" class="logo-image" />
+    <section class="flex flex-col gap-6 text-slate-900">
+      <div class="flex items-center gap-3">
+        <img src="/landing_logo.png" alt="GoPA logo" class="w-[500px] h-[213px] object-contain drop-shadow-[0_10px_25px_rgba(37,99,235,0.25)]" />
       </div>
 
-      <h1 class="heading">Automated GPA Intelligence for SUSL</h1>
-      <p class="subtitle">
+      <h1 class="text-5xl font-extrabold leading-[1.15] m-0 tracking-tight text-slate-900">Automated GPA Intelligence for SUSL</h1>
+      <p class="text-lg text-slate-600 m-0 max-w-2xl leading-relaxed">
         GoPA helps students of Sabaragamuwa University of Sri lanka track, forecast, and analyze GPA performance with clarity.
       </p>
 
-      <div class="quick-facts">
-        <div class="chip">Real-time GPA tracking</div>
-        <div class="chip">Year-wise analytics</div>
-        <div class="chip">Repeat detection</div>
+      <div class="flex flex-wrap gap-3">
+        <div class="bg-white/70 border border-blue-600/15 text-slate-600 px-4 py-2.5 rounded-full font-semibold text-sm backdrop-blur-sm">Real-time GPA tracking</div>
+        <div class="bg-white/70 border border-blue-600/15 text-slate-600 px-4 py-2.5 rounded-full font-semibold text-sm backdrop-blur-sm">Year-wise analytics</div>
+        <div class="bg-white/70 border border-blue-600/15 text-slate-600 px-4 py-2.5 rounded-full font-semibold text-sm backdrop-blur-sm">Repeat detection</div>
       </div>
 
-      <div class="button-group">
-        <button class="btn btn-primary" [routerLink]="['/auth/login']">Login</button>
-        <button class="btn btn-secondary" [routerLink]="['/auth/register']">Register</button>
+      <div class="flex gap-3 flex-wrap">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white border-2 border-black/50 px-7 py-3.5 rounded-lg text-base font-bold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:scale-105 shadow-[0_10px_24px_rgba(15,23,42,0.08)] hover:shadow-[0_18px_38px_rgba(37,99,235,0.28)] no-underline inline-flex items-center justify-center gap-2" [routerLink]="['/auth/login']">Login</button>
+        <button class="bg-white hover:bg-gray-50 text-slate-800 border-2 border-black/50 px-7 py-3.5 rounded-lg text-base font-bold cursor-pointer transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:scale-105 shadow-[0_10px_24px_rgba(15,23,42,0.08)] hover:shadow-[0_16px_32px_rgba(15,23,42,0.12)] no-underline inline-flex items-center justify-center gap-2" [routerLink]="['/auth/register']">Register</button>
       </div>
     </section>
 
     <!-- Right: Highlight card -->
-    <section class="card">
-      <div class="card-header">
-        <p class="eyebrow">Why GoPA?</p>
-        <h2 class="card-title">Plan smarter. Graduate confident.</h2>
-        <p class="card-text">
+    <section class="bg-white/90 border border-white/45 shadow-glass rounded-2xl p-8 flex flex-col gap-6">
+      <div class="flex flex-col gap-2">
+        <p class="tracking-widest text-2xl font-bold text-blue-800 m-0">Why GoPA?</p>
+        <h2 class="text-2xl m-0 text-slate-900 tracking-tight">Plan smarter. Graduate confident.</h2>
+        <p class="m-0 text-slate-600 leading-relaxed">
           Stay ahead with automated GPA calculations, repeat alerts, and dashboards tailored for the 21/22 Software
           Engineering batch.
         </p>
       </div>
 
-      <div class="stats">
-        <div class="stat">
-          <span class="stat-value">24/7</span>
-          <span class="stat-label">Access anywhere</span>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-white/80 border border-blue-600/10 rounded-2xl p-4 flex flex-col gap-1 shadow-[0_10px_30px_rgba(15,23,42,0.08)]">
+          <span class="text-xl font-extrabold text-slate-900">24/7</span>
+          <span class="text-base text-slate-600">Access anywhere</span>
         </div>
-        <div class="stat">
-          <span class="stat-value">+5</span>
-          <span class="stat-label">Views: term, year, course</span>
+        <div class="bg-white/80 border border-blue-600/10 rounded-2xl p-4 flex flex-col gap-1 shadow-[0_10px_30px_rgba(15,23,42,0.08)]">
+          <span class="text-xl font-extrabold text-slate-900">+5</span>
+          <span class="text-base text-slate-600">Views: term, year, course</span>
         </div>
-        <div class="stat">
-          <span class="stat-value">Zero</span>
-          <span class="stat-label">Manual recalcs</span>
+        <div class="bg-white/80 border border-blue-600/10 rounded-2xl p-4 flex flex-col gap-1 shadow-[0_10px_30px_rgba(15,23,42,0.08)]">
+          <span class="text-xl font-extrabold text-slate-900">Zero</span>
+          <span class="text-base text-slate-600">Manual recalcs</span>
         </div>
       </div>
 
-      <div class="cta-hint">
-        <span class="pulse"></span>
-        <p>Start at the dashboard in under a minute.</p>
+      <div class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl bg-blue-600/8 text-slate-700 font-semibold">
+        <span class="w-2.5 h-2.5 rounded-full bg-accent relative animate-pulse"></span>
+        <p class="m-0">Start at the dashboard in under a minute.</p>
       </div>
     </section>
   </div>

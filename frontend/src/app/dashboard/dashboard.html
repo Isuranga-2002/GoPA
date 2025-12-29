@@ -1,51 +1,55 @@
-<div class="gopa-background dashboard-container">
+<div class="gopa-background min-h-screen font-sans relative overflow-x-hidden">
+  <!-- Background gradients and effects -->
+  <div class="fixed bottom-0 left-0 right-0 h-screen bg-cover bg-bottom bg-no-repeat bg-fixed opacity-[0.03] z-0 pointer-events-none" style="background-image: url('/landing_background.png')"></div>
+  <div class="fixed inset-0 bg-gradient-to-br from-slate-50/40 via-slate-200/60 to-slate-50/40 z-0 pointer-events-none"></div>
+
   <!-- Top Navigation Bar -->
-  <header class="top-nav">
-    <div class="nav-left">
-      <div class="logo">
-        <img src="/logo_withoutbg.png" alt="GoPA Logo" class="logo-image">
-        <div class="logo-text">
-          <span class="logo-title">GoPA</span>
-          <span class="logo-subtitle">Student Dashboard</span>
+  <header class="bg-white/95 backdrop-blur-xl shadow-glass-sm px-8 py-4 flex justify-between items-center sticky top-0 z-[1000] border-b border-slate-200/60">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4">
+        <img src="/logo_withoutbg.png" alt="GoPA Logo" class="w-11 h-11 object-contain drop-shadow-[0_2px_8px_rgba(15,23,42,0.15)]">
+        <div class="flex flex-col">
+          <span class="text-2xl font-bold text-primary leading-none m-0 tracking-tight">GoPA</span>
+          <span class="text-xs text-slate-600 font-medium -mt-0.5 tracking-wider">Student Dashboard</span>
         </div>
       </div>
     </div>
     
-    <div class="nav-right">
-      <div class="user-info">
-        <div class="user-details">
-          <span class="user-name">{{ studentData.name }}</span>
-          <span class="user-index">{{ studentData.indexNumber }}</span>
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-4 bg-white/80 px-4 py-2 rounded-xl border border-slate-200/80 backdrop-blur-sm shadow-glass-sm">
+        <div class="flex flex-col items-end text-right">
+          <span class="font-semibold text-slate-900 text-sm leading-tight">{{ studentData.name }}</span>
+          <!-- <span class="text-xs text-slate-600 font-medium">{{ studentData.indexNumber }}</span> -->
         </div>
-        <div class="user-avatar">
+        <div class="w-9 h-9 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white text-sm font-semibold border-2 border-white/30 shadow-glass-sm">
           {{ studentData.name.charAt(0) }}
         </div>
       </div>
-      <button class="logout-btn" (click)="logout()">
-        <span class="logout-text">Logout</span>
+      <button class="bg-transparent text-slate-600 border border-slate-400/30 p-3 rounded-full cursor-pointer flex items-center justify-center w-11 h-11 text-xl transition-all duration-200 hover:bg-red-50 hover:border-red-300 hover:text-red-600 hover:transform hover:-translate-y-0.5 hover:scale-105 hover:shadow-glass-sm" (click)="logout()" title="Log out">
+        <span class="transition-transform duration-200 hover:rotate-[-10deg]">←</span>
       </button>
       
       <!-- Mobile menu toggle -->
-      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
-        <span class="hamburger">☰</span>
-      </button>
+      <!-- <button class="hidden bg-none border-none text-2xl cursor-pointer text-slate-900 p-2 rounded-lg transition-all duration-200 hover:bg-slate-200/30 md:block" (click)="toggleMobileMenu()">
+        <span>☰</span>
+      </button> -->
     </div>
   </header>
 
-  <div class="dashboard-body">
+  <div class="flex min-h-[calc(100vh-85px)] relative z-10">
     <!-- Side Navigation -->
-    <aside class="side-nav" [class.mobile-open]="isMobileMenuOpen">
-      <nav class="nav-menu">
-        <ul class="menu-list">
+    <aside class="w-70 bg-white/90 backdrop-blur-xl shadow-glass-sm py-8 fixed top-[85px] left-0 h-[calc(100vh-85px)] overflow-y-auto border-r border-slate-200/60 z-[100]" [class.mobile-open]="isMobileMenuOpen">
+      <nav class="px-6">
+        <ul class="list-none p-0 m-0">
           <li *ngFor="let item of menuItems" 
-              class="menu-item" 
-              [class.active]="item.active"
-              [class.disabled]="item.disabled">
+              class="mb-1.5"
+              [class.opacity-50]="item.disabled">
             <a (click)="navigateTo(item.path)" 
-               [class.disabled-link]="item.disabled"
-               class="menu-link">
-              <span class="menu-label">{{ item.label }}</span>
-              <span *ngIf="item.disabled" class="coming-soon">Soon</span>
+               [class]="item.disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'"
+               class="flex items-center justify-between px-5 py-3.5 no-underline text-slate-600 rounded-xl transition-all duration-200 relative font-medium text-sm border border-transparent tracking-wide hover:bg-accent/8 hover:text-accent hover:border-accent/15 hover:transform hover:translate-x-1"
+               [ngClass]="item.active ? 'bg-gradient-to-br from-accent to-accent-light text-slate-900 shadow-glass-md border-accent' : ''">
+              <span class="flex-1 font-medium">{{ item.label }}</span>
+              <span *ngIf="item.disabled" class="bg-gradient-to-br from-warning to-orange-500 text-white text-[0.6rem] px-2 py-1 rounded-lg font-semibold uppercase tracking-wider shadow-glass-sm">Soon</span>
             </a>
           </li>
         </ul>
@@ -53,66 +57,75 @@
     </aside>
 
     <!-- Main Content Area -->
-    <main class="main-content">
+    <main class="flex-1 ml-70 p-4 relative z-10 min-h-[calc(100vh-85px)]">
       <!-- Dashboard Overview (Default View) -->
       <div class="overview-section">
         <!-- Welcome Message -->
-        <section class="welcome-section">
-          <div class="welcome-content">
-            <h2 class="welcome-title">Welcome back, {{ studentData.name }}!</h2>
-            <p class="status-message">
+        <section class="bg-white/85 backdrop-blur-xl rounded-2xl p-6 mb-6 shadow-glass border border-white/20">
+          <div class="text-center">
+            <h2 class="text-2xl text-slate-900 m-0 mb-3 font-bold tracking-tight">Welcome back, {{ studentData.name }}!</h2>
+            <p class="flex items-center justify-center gap-2 text-success font-semibold m-0 text-sm px-4 py-2 bg-green-100 rounded-xl border border-green-200">
+              <span class="text-lg">✓</span>
               {{ studentData.resultsStatus }}
             </p>
           </div>
         </section>
 
         <!-- Summary Cards -->
-        <section class="summary-section">
-          <h3 class="section-title">Academic Overview</h3>
-          <div class="summary-grid">
+        <section class="mb-6">
+          <h3 class="text-slate-900 text-xl mb-4 font-bold text-center tracking-tight">Academic Overview</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             <div *ngFor="let card of summaryCards" 
-                 class="summary-card" 
-                 [ngClass]="getCardColorClass(card.color)">
-              <div class="card-header">
-                <h4 class="card-title">{{ card.title }}</h4>
-                <div class="card-icon" [ngClass]="getCardIconClass(card.color)"></div>
+                 class="bg-white/85 backdrop-blur-xl rounded-2xl p-5 shadow-glass transition-all duration-300 border border-white/20 relative overflow-hidden hover:transform hover:-translate-y-1 hover:shadow-glass-md">
+              <!-- Top gradient bar -->
+              <div class="absolute top-0 left-0 right-0 h-1" 
+                   [ngClass]="{
+                     'bg-gradient-to-r from-primary to-primary-light': card.color === 'primary',
+                     'bg-gradient-to-r from-success to-green-600': card.color === 'success',
+                     'bg-gradient-to-r from-warning to-orange-500': card.color === 'warning',
+                     'bg-gradient-to-r from-accent to-accent-light': card.color === 'info'
+                   }"></div>
+              
+              <div class="flex justify-between items-start mb-4">
+                <h4 class="text-xs text-slate-600 m-0 font-semibold uppercase tracking-widest">{{ card.title }}</h4>
+                <div class="w-2.5 h-2.5 rounded-full shadow-glass-sm" 
+                     [ngClass]="{
+                       'bg-gradient-to-br from-primary to-primary-light': card.color === 'primary',
+                       'bg-gradient-to-br from-success to-green-600': card.color === 'success',
+                       'bg-gradient-to-br from-warning to-orange-500': card.color === 'warning',
+                       'bg-gradient-to-br from-accent to-accent-light': card.color === 'info'
+                     }"></div>
               </div>
-              <div class="card-body">
-                <div class="card-value">{{ card.value }}</div>
-                <div class="card-description">{{ card.description }}</div>
+              <div>
+                <div class="text-3xl font-extrabold text-slate-900 mb-1.5 leading-none tracking-tight">{{ card.value }}</div>
+                <div class="text-slate-600 text-sm font-medium tracking-wide">{{ card.description }}</div>
               </div>
             </div>
           </div>
         </section>
 
         <!-- Quick Actions -->
-        <section class="quick-actions-section">
-          <h3 class="section-title">Quick Actions</h3>
-          <div class="actions-grid">
-            <button class="action-btn" (click)="navigateTo('/dashboard/results')">
-              <div class="action-content">
-                <span class="action-text">View Results</span>
-                <span class="action-desc">Check your grades</span>
+        <section class="mb-6">
+          <h3 class="text-slate-900 text-xl mb-4 font-bold text-center tracking-tight">Quick Actions</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <button class="bg-white/85 backdrop-blur-xl border border-white/20 rounded-2xl p-5 cursor-pointer transition-all duration-300 flex items-center justify-center relative shadow-glass-sm text-center min-h-20 hover:transform hover:-translate-y-1 hover:shadow-glass hover:bg-accent/5 hover:border-accent/20" (click)="navigateTo('/dashboard/results')">
+              <div class="flex flex-col items-center gap-2">
+                <span class="font-semibold text-slate-900 text-base m-0 tracking-tight">View Results</span>
+                <span class="text-xs text-slate-600 font-medium m-0 tracking-wide">Check your grades</span>
               </div>
             </button>
-            <button class="action-btn" (click)="navigateTo('/dashboard/cumulative-gpa')">
-              <div class="action-content">
-                <span class="action-text">CGPA Analysis</span>
-                <span class="action-desc">Track your progress</span>
+            <button class="bg-white/85 backdrop-blur-xl border border-white/20 rounded-2xl p-5 cursor-pointer transition-all duration-300 flex items-center justify-center relative shadow-glass-sm text-center min-h-20 hover:transform hover:-translate-y-1 hover:shadow-glass hover:bg-accent/5 hover:border-accent/20" (click)="navigateTo('/dashboard/repeats')">
+              <div class="flex flex-col items-center gap-2">
+                <span class="font-semibold text-slate-900 text-base m-0 tracking-tight">Repeats & Medicals</span>
+                <span class="text-xs text-slate-600 font-medium m-0 tracking-wide">Manage special cases</span>
               </div>
             </button>
-            <button class="action-btn" (click)="navigateTo('/dashboard/repeats')">
-              <div class="action-content">
-                <span class="action-text">Repeats & Medicals</span>
-                <span class="action-desc">Manage special cases</span>
+            <button class="bg-white/85 backdrop-blur-xl border border-white/20 rounded-2xl p-5 cursor-not-allowed transition-all duration-300 flex items-center justify-center relative shadow-glass-sm text-center min-h-20 opacity-50" disabled>
+              <div class="flex flex-col items-center gap-2">
+                <span class="font-semibold text-slate-900 text-base m-0 tracking-tight">Download Report</span>
+                <span class="text-xs text-slate-600 font-medium m-0 tracking-wide">Coming soon</span>
               </div>
-            </button>
-            <button class="action-btn disabled" disabled>
-              <div class="action-content">
-                <span class="action-text">Download Report</span>
-                <span class="action-desc">Coming soon</span>
-              </div>
-              <span class="coming-soon-badge">Soon</span>
+              <span class="absolute top-3 right-3 bg-gradient-to-br from-warning to-orange-500 text-white text-[0.6rem] px-2 py-1 rounded-lg font-semibold uppercase tracking-wider shadow-glass-sm">Soon</span>
             </button>
           </div>
         </section>
